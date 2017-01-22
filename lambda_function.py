@@ -11,21 +11,6 @@ import random
 from rapidconnect import RapidConnect
 rapid = RapidConnect("FitVoice", "fbfab538-b442-42ab-bc4e-2861da68995f")
 
-rand_year = random.randint(2010,2016)
-rand_month = random.randint(1,12)
-rand_day = random.randint(1,28)
-
-our_date = '{Year}-{Month}-{Day}'.format(Year = rand_year, Month = rand_month, Day = rand_day)
-nasa = rapid.call('NasaAPI', 'getPictureOfTheDay', { 
-    'apiKey': 'oIQ6aw0O6Fc9h5islHbO9c789S3sztX7DpOjmejq',
-    'date': our_date, 
-    'highResolution': ''
-})
-
-image_url = nasa['url']
-title = nasa['title']
-description = nasa['explanation']
-
 #print("{Title}\n{Image}\n{Description}".format(Title=title, Image=image_url, Description=description))
 
 account_sid = "AC5f9d3cb624a7ef8592558e8b8ba94c7b"
@@ -102,6 +87,21 @@ def set_number_in_session(intent, session):
     card_title = intent['name']
     session_attributes = {}
     should_end_session = False
+
+    rand_year = random.randint(2010,2016)
+    rand_month = random.randint(1,12)
+    rand_day = random.randint(1,28)
+
+    our_date = '{Year}-{Month}-{Day}'.format(Year = rand_year, Month = rand_month, Day = rand_day)
+    nasa = rapid.call('NasaAPI', 'getPictureOfTheDay', { 
+        'apiKey': 'oIQ6aw0O6Fc9h5islHbO9c789S3sztX7DpOjmejq',
+        'date': our_date, 
+        'highResolution': ''
+    })
+
+    image_url = nasa['url']
+    title = nasa['title']
+    description = nasa['explanation']
 
     if 'PhoneNumber' in intent['slots']:
         phone_number = intent['slots']['PhoneNumber']['value']
