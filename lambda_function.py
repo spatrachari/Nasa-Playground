@@ -108,9 +108,6 @@ def set_number_in_session(intent, session):
         session_attributes = create_phone_number_attributes(phone_number)
         #speech_output = "Sending message to " + \
         #                phone_number + "Success!"
-        speech_output = "Here is " + title +\
-                         "........ The description reads" + description
-        reprompt_text = ""
         
         try:
             resulttwo = rapid.call('Twilio', 'sendMms', { 
@@ -132,6 +129,10 @@ def set_number_in_session(intent, session):
             should_end_session = True
             pass
 
+        speech_output = "Here is " + title +\
+                         "........ The description reads" + description
+        reprompt_text = ""
+        
     else:
         speech_output = "I'm sorry, I couldn't quite catch that. " \
                         "Could you please repeat the number."
